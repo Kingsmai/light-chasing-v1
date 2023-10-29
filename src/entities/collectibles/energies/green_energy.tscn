@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://blkm7j8oj8oth"]
+
+[ext_resource type="PackedScene" uid="uid://d3wbupk0fxnh0" path="res://src/entities/collectibles/energies/red_energy.tscn" id="1_yyhok"]
+[ext_resource type="Texture2D" uid="uid://hiqxykqa61lv" path="res://assets/collectibles/energy_fire.png" id="2_6wb2x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56jny"]
+atlas = ExtResource("2_6wb2x")
+region = Rect2(7, 0, 7, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7nnot"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56jny")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="GreenEnergy" instance=ExtResource("1_yyhok")]
+energy_color = "Green"
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_7nnot")

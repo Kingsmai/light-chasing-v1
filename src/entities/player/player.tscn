@@ -1,7 +1,17 @@
-[gd_scene load_steps=29 format=3 uid="uid://cseka6jdew76e"]
+[gd_scene load_steps=40 format=3 uid="uid://dymnqpbs1tmai"]
 
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_ytqny"]
 [ext_resource type="Texture2D" uid="uid://bdbcnt21kwe7w" path="res://assets/sprites/mHero_.png" id="2_2ktwp"]
+[ext_resource type="Texture2D" uid="uid://dx3p8avq7fq0k" path="res://assets/effects/light.png" id="2_bt3y4"]
+[ext_resource type="Texture2D" uid="uid://8y1wecwxxopd" path="res://assets/items/Torch.png" id="4_iqq1v"]
+[ext_resource type="Texture2D" uid="uid://cs15pibomrk5u" path="res://assets/effects/TorchLight.png" id="4_xfsi8"]
+[ext_resource type="Texture2D" uid="uid://by7ld675efd3e" path="res://resources/atlas_textures/health/health_full.tres" id="6_p1ic4"]
+[ext_resource type="Texture2D" uid="uid://qs8amq4wnap7" path="res://resources/atlas_textures/energy_gauges/energy_gauge.tres" id="7_834nc"]
+[ext_resource type="Texture2D" uid="uid://cpgc4u8o67ekq" path="res://resources/atlas_textures/energy_gauges/red_energy.tres" id="8_munnr"]
+[ext_resource type="Texture2D" uid="uid://cxbvuy4u85sci" path="res://resources/atlas_textures/energy_gauges/blue_energy.tres" id="9_2n1i0"]
+[ext_resource type="Texture2D" uid="uid://c34m85cjoomyd" path="res://resources/atlas_textures/energy_gauges/green_energy.tres" id="10_wi7e6"]
+[ext_resource type="Texture2D" uid="uid://blwmyur6ua0w5" path="res://resources/atlas_textures/setting_button/setting.tres" id="11_dsdb7"]
+[ext_resource type="Texture2D" uid="uid://bum24pup50vkn" path="res://resources/atlas_textures/setting_button/setting_hover.tres" id="12_byxcw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrhck"]
 atlas = ExtResource("2_2ktwp")
@@ -205,10 +215,26 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m88oa"]
-size = Vector2(8, 6)
+size = Vector2(13, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eiwmi"]
+size = Vector2(64, 26)
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_ytqny")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+limit_left = 0
+limit_top = 0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1, -3)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("2_bt3y4")
+texture_scale = 0.4
 
 [node name="Anim" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
@@ -216,5 +242,261 @@ sprite_frames = SubResource("SpriteFrames_p1l01")
 animation = &"death_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0.5, -8)
 shape = SubResource("RectangleShape2D_m88oa")
+
+[node name="Hand" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(5, -4)
+
+[node name="Torch" type="Sprite2D" parent="Hand"]
+rotation = 1.5708
+texture = ExtResource("4_iqq1v")
+
+[node name="TorchDamage" type="Area2D" parent="Hand"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Hand/TorchDamage"]
+visible = false
+rotation = 1.5708
+texture = ExtResource("4_xfsi8")
+offset = Vector2(0, -36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/TorchDamage"]
+position = Vector2(36, 0)
+shape = SubResource("RectangleShape2D_eiwmi")
+
+[node name="RedTorchLight" type="PointLight2D" parent="Hand"]
+unique_name_in_owner = true
+visible = false
+rotation = 1.5708
+color = Color(1, 0, 0, 1)
+energy = 0.8
+shadow_enabled = true
+texture = ExtResource("4_xfsi8")
+offset = Vector2(0, -36)
+
+[node name="GreenTorchLight" type="PointLight2D" parent="Hand"]
+unique_name_in_owner = true
+visible = false
+rotation = 1.5708
+color = Color(0, 1, 0, 1)
+energy = 0.8
+shadow_enabled = true
+texture = ExtResource("4_xfsi8")
+offset = Vector2(0, -36)
+
+[node name="BlueTorchLight" type="PointLight2D" parent="Hand"]
+unique_name_in_owner = true
+visible = false
+rotation = 1.5708
+color = Color(0, 0, 1, 1)
+energy = 0.8
+shadow_enabled = true
+texture = ExtResource("4_xfsi8")
+offset = Vector2(0, -36)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Gauges" type="HBoxContainer" parent="HUD"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 238.0
+offset_bottom = 24.0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="HealthBar" type="HBoxContainer" parent="HUD/Gauges"]
+layout_mode = 2
+
+[node name="Health" type="TextureRect" parent="HUD/Gauges/HealthBar"]
+layout_mode = 2
+texture = ExtResource("6_p1ic4")
+
+[node name="Health2" type="TextureRect" parent="HUD/Gauges/HealthBar"]
+layout_mode = 2
+texture = ExtResource("6_p1ic4")
+
+[node name="Health3" type="TextureRect" parent="HUD/Gauges/HealthBar"]
+layout_mode = 2
+texture = ExtResource("6_p1ic4")
+
+[node name="RedGauge" type="TextureRect" parent="HUD/Gauges"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_834nc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Gauges/RedGauge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -4.0
+offset_right = 24.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="RedBlock" type="TextureRect" parent="HUD/Gauges/RedGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("8_munnr")
+
+[node name="RedBlock2" type="TextureRect" parent="HUD/Gauges/RedGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("8_munnr")
+
+[node name="RedBlock3" type="TextureRect" parent="HUD/Gauges/RedGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("8_munnr")
+
+[node name="RedBlock4" type="TextureRect" parent="HUD/Gauges/RedGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("8_munnr")
+
+[node name="RedBlock5" type="TextureRect" parent="HUD/Gauges/RedGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("8_munnr")
+
+[node name="GreenGauge" type="TextureRect" parent="HUD/Gauges"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_834nc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Gauges/GreenGauge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -4.0
+offset_right = 24.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="RedBlock" type="TextureRect" parent="HUD/Gauges/GreenGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("10_wi7e6")
+
+[node name="RedBlock2" type="TextureRect" parent="HUD/Gauges/GreenGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("10_wi7e6")
+
+[node name="RedBlock3" type="TextureRect" parent="HUD/Gauges/GreenGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("10_wi7e6")
+
+[node name="RedBlock4" type="TextureRect" parent="HUD/Gauges/GreenGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("10_wi7e6")
+
+[node name="RedBlock5" type="TextureRect" parent="HUD/Gauges/GreenGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("10_wi7e6")
+
+[node name="BlueGauge" type="TextureRect" parent="HUD/Gauges"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_834nc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Gauges/BlueGauge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -4.0
+offset_right = 24.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="RedBlock" type="TextureRect" parent="HUD/Gauges/BlueGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("9_2n1i0")
+
+[node name="RedBlock2" type="TextureRect" parent="HUD/Gauges/BlueGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("9_2n1i0")
+
+[node name="RedBlock3" type="TextureRect" parent="HUD/Gauges/BlueGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("9_2n1i0")
+
+[node name="RedBlock4" type="TextureRect" parent="HUD/Gauges/BlueGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("9_2n1i0")
+
+[node name="RedBlock5" type="TextureRect" parent="HUD/Gauges/BlueGauge/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("9_2n1i0")
+
+[node name="SettingButton" type="TextureButton" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -37.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 37.0
+grow_horizontal = 0
+texture_normal = ExtResource("11_dsdb7")
+texture_pressed = ExtResource("12_byxcw")
+texture_hover = ExtResource("12_byxcw")
+texture_disabled = ExtResource("11_dsdb7")
+texture_focused = ExtResource("11_dsdb7")
+
+[node name="TimerLabel" type="Label" parent="HUD"]
+offset_left = 325.0
+offset_top = 4.0
+offset_right = 365.0
+offset_bottom = 30.0
+text = "5:00"
+horizontal_alignment = 1
+
+[node name="OneSecondTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="Hand/TorchDamage" to="." method="_on_torch_damage_body_entered"]
+[connection signal="body_exited" from="Hand/TorchDamage" to="." method="_on_torch_damage_body_exited"]
+[connection signal="timeout" from="OneSecondTimer" to="." method="_on_one_second_timer_timeout"]

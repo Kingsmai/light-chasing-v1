@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://4lkhlmkxbytn"]
+
+[ext_resource type="Script" path="res://src/spawners/monster_spawner.gd" id="1_1s3nr"]
+
+[node name="MonsterSpawner" type="Node"]
+script = ExtResource("1_1s3nr")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cm0vt3frjhrk7"
+path="res://.godot/imported/Creepy Hallow.mp3-94e76b18a2818135fd00fe9188e89c63.mp3str"
+
+[deps]
+
+source_file="res://assets/audios/Creepy Hallow.mp3"
+dest_files=["res://.godot/imported/Creepy Hallow.mp3-94e76b18a2818135fd00fe9188e89c63.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

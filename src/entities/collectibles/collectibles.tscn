@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3 uid="uid://bmgim6n2a2b8"]
+
+[ext_resource type="Script" path="res://src/entities/collectibles/collectibles.gd" id="1_exis7"]
+[ext_resource type="Texture2D" uid="uid://brf6ediubpoqq" path="res://assets/collectibles/fire_.png" id="1_jo3tg"]
+[ext_resource type="Texture2D" uid="uid://dx3p8avq7fq0k" path="res://assets/effects/light.png" id="3_4gtar"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5k1a"]
+atlas = ExtResource("1_jo3tg")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljgk7"]
+atlas = ExtResource("1_jo3tg")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hv5n"]
+atlas = ExtResource("1_jo3tg")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfidh"]
+atlas = ExtResource("1_jo3tg")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjd1p"]
+atlas = ExtResource("1_jo3tg")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25xam"]
+atlas = ExtResource("1_jo3tg")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfrn1"]
+atlas = ExtResource("1_jo3tg")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdqiv"]
+atlas = ExtResource("1_jo3tg")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qto76"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5k1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljgk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hv5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfidh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjd1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25xam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfrn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdqiv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bsrd1"]
+radius = 6.0
+
+[node name="Collectibles" type="Area2D" groups=["Fire"]]
+position = Vector2(0, 1)
+script = ExtResource("1_exis7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qto76")
+autoplay = "default"
+frame_progress = 0.117572
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bsrd1")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+blend_mode = 2
+texture = ExtResource("3_4gtar")
+texture_scale = 0.1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
