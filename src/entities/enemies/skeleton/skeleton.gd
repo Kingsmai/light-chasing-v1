@@ -1,5 +1,7 @@
 extends Monsters
 
+@onready var spawn_sound: AudioStreamPlayer = $SpawnSound
+
 
 func _ready() -> void:
 	current_state = state.SKULL
@@ -11,6 +13,7 @@ func _on_player_detector_body_entered(body: Node2D) -> void:
 			# Spawn
 			current_state = state.SPAWNING
 			anim.play("spawn")
+			spawn_sound.play()
 			await anim.animation_finished
 			# Chase player if in radius after spawn
 			if body.position.distance_to(position) <= player_detector_collider.shape.radius:

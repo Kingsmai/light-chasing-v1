@@ -6,7 +6,7 @@
 script = ExtResource("1_o8cbs")
 
 [node name="EnergySpawnTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 autostart = true
 
 [connection signal="timeout" from="EnergySpawnTimer" to="." method="_on_energy_spawn_timer_timeout"]

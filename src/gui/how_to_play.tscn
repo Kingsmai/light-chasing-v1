@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2r8bqw8x7mm0"]
+
+[ext_resource type="Script" path="res://src/gui/how_to_play.gd" id="1_3j602"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1udsm"]
+
+[node name="How To Play" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3j602")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.752941)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_1udsm")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 8
+text = "这破游戏怎么玩？！
+
+移动
+	WASD 控制角色移动
+鼠标 控制手电筒方向
+	按键 1 手电筒发射红色光线击杀红色小怪
+	按键 2 手电筒发射绿色光线击杀绿色小怪
+	按键 3 手电筒发射蓝色光线击杀蓝色小怪
+	三种颜色可以多开，击杀对应颜色的怪物
+	按一下即可发射光线，不需要长按
+	光线在 5s 后自动消失，击杀怪物需要照射它 1.5s
+ESC设置
+Esc 键退出此画面"

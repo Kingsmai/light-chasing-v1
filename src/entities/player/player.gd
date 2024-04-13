@@ -24,6 +24,8 @@ var light_prepare_to_add = 0.0
 
 @onready var timer_label: Label = $HUD/TimerLabel
 
+@onready var hit_sound: AudioStreamPlayer = $HitSound
+
 var facing_right := true
 
 enum states {
@@ -98,7 +100,7 @@ var timer = 300: # seconds
 		timer = val
 		var min = val / 60
 		var sec = val % 60
-		var time_str = str(min).pad_zeros(2) + ":" + str(sec).pad_zeros(2)
+		var time_str = str(abs(min)).pad_zeros(2) + ":" + str(abs(sec)).pad_zeros(2)
 		timer_label.text = time_str
 
 func _ready() -> void:
@@ -109,11 +111,14 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	
-	direction = Vector2(
-		Input.get_axis("move_left", "move_right"),
-		Input.get_axis("move_up", "move_down")
-	).normalized()
+	if health > 0:
+		direction = Vector2(
+			Input.get_axis("move_left", "move_right"),
+			Input.get_axis("move_up", "move_down")
+		).normalized()
+	else:
+		direction = Vector2.ZERO
+		velocity = Vector2.ZERO
 	
 	look_direction = camera_2d.get_global_mouse_position() - position
 	hand.rotation = look_direction.angle()
@@ -176,7 +181,7 @@ func _process(delta: float) -> void:
 		light_prepare_to_add -= delta
 	
 	# Body light decrease overtime
-	point_light_2d.texture_scale = clamp(point_light_2d.texture_scale - 0.025 * delta, 0.25, 1)
+	point_light_2d.texture_scale = clamp(point_light_2d.texture_scale - 0.04 * delta, 0.25, 1)
 #	point_light_2d.energy = clamp(point_light_2d.energy - 0.025 * delta, 0.25, 0.75)
 	
 	# Decrase monster's life overtime
@@ -210,6 +215,7 @@ func grow_energy(color:String):
 
 
 func take_damage(amount):
+	hit_sound.play()
 	health -= amount
 
 

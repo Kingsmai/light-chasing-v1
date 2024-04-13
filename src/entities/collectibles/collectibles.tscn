@@ -85,6 +85,7 @@ shape = SubResource("CircleShape2D_bsrd1")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 blend_mode = 2
+shadow_enabled = true
 texture = ExtResource("3_4gtar")
 texture_scale = 0.1
 

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cra02jhog5r6f"
+path="res://.godot/imported/Science Fiction Sci-Fi Alien Growl 04.wav-25be5da69c2997947238f3ef2cd718ff.sample"
+
+[deps]
+
+source_file="res://assets/audios/Science Fiction Sci-Fi Alien Growl 04.wav"
+dest_files=["res://.godot/imported/Science Fiction Sci-Fi Alien Growl 04.wav-25be5da69c2997947238f3ef2cd718ff.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

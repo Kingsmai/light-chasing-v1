@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl30g7ilrfni0"]
+
+[ext_resource type="Script" path="res://src/gui/credits.gd" id="1_gbsum"]
+[ext_resource type="FontFile" uid="uid://c3m6o2mwnyc83" path="res://assets/fonts/WenCangShuFang-2.ttf" id="2_7jusl"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cx344"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gbsum")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.0941176, 0.0941176, 0.0941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_cx344")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_7jusl")
+text = "《光追》
+策划：赵伊雪 麦祖奕 李岩杰
+美工：韩欣月 邹佳丽 李岩杰 
+音乐：赵伊雪
+程序：麦祖奕
+
+
+特别鸣谢：
+音乐：
+Rafael Krux	《Asking Questions》
+Alexander Nakarada《Creepy Hallow》
+Bryan Teoh《Gotta Keep On Movin》
+图片：
+analogStudios_"

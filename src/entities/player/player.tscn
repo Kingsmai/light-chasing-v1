@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dymnqpbs1tmai"]
+[gd_scene load_steps=41 format=3 uid="uid://dymnqpbs1tmai"]
 
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_ytqny"]
 [ext_resource type="Texture2D" uid="uid://bdbcnt21kwe7w" path="res://assets/sprites/mHero_.png" id="2_2ktwp"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c34m85cjoomyd" path="res://resources/atlas_textures/energy_gauges/green_energy.tres" id="10_wi7e6"]
 [ext_resource type="Texture2D" uid="uid://blwmyur6ua0w5" path="res://resources/atlas_textures/setting_button/setting.tres" id="11_dsdb7"]
 [ext_resource type="Texture2D" uid="uid://bum24pup50vkn" path="res://resources/atlas_textures/setting_button/setting_hover.tres" id="12_byxcw"]
+[ext_resource type="AudioStream" uid="uid://g6lbu4r0crel" path="res://assets/audios/Weapon Axe Whip 02.wav" id="13_34r5h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrhck"]
 atlas = ExtResource("2_2ktwp")
@@ -472,6 +473,7 @@ size_flags_vertical = 4
 texture = ExtResource("9_2n1i0")
 
 [node name="SettingButton" type="TextureButton" parent="HUD"]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -496,6 +498,9 @@ horizontal_alignment = 1
 
 [node name="OneSecondTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_34r5h")
 
 [connection signal="body_entered" from="Hand/TorchDamage" to="." method="_on_torch_damage_body_entered"]
 [connection signal="body_exited" from="Hand/TorchDamage" to="." method="_on_torch_damage_body_exited"]
